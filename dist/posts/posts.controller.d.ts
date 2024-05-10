@@ -1,3 +1,6 @@
+import { PostsService } from './posts.service';
 export declare class PostsController {
-    getAllPosts(): string;
+    postsService: PostsService;
+    constructor(postsService: PostsService);
+    getAllPosts(): string[];
 }
