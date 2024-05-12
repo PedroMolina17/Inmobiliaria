@@ -19,6 +19,15 @@ let PostsController = class PostsController {
     getAllPosts() {
         return this.postsService.getPosts();
     }
+    createPost() {
+        return this.postsService.createPosts();
+    }
+    updatePosts() {
+        return this.postsService.updatePosts();
+    }
+    deletePosts() {
+        return this.postsService.deletePosts();
+    }
 };
 exports.PostsController = PostsController;
 __decorate([
@@ -27,6 +36,24 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], PostsController.prototype, "getAllPosts", null);
+__decorate([
+    (0, common_1.Post)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], PostsController.prototype, "createPost", null);
+__decorate([
+    (0, common_1.Put)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], PostsController.prototype, "updatePosts", null);
+__decorate([
+    (0, common_1.Delete)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], PostsController.prototype, "deletePosts", null);
 exports.PostsController = PostsController = __decorate([
     (0, common_1.Controller)('posts'),
     __metadata("design:paramtypes", [posts_service_1.PostsService])
