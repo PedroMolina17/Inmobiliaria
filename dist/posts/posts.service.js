@@ -9,11 +9,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 let PostsService = class PostsService {
-    getPosts() {
-        return ['post1', 'post2', 'post3', 'post4', 'post5'];
+    constructor() {
+        this.posts = [];
     }
-    createPosts() {
-        return 'Creando a post';
+    getPosts() {
+        return this.posts;
+    }
+    getPostById(id) {
+        return this.posts.find((post) => post.id === id);
+    }
+    createPosts(post) {
+        this.posts.push(post);
+        return 'aaaaaaaa';
     }
     updatePosts() {
         return 'update posts';

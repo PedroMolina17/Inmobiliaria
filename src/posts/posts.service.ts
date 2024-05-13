@@ -2,12 +2,19 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PostsService {
+  private posts = [];
+
   getPosts() {
-    return ['post1', 'post2', 'post3', 'post4', 'post5'];
+    return this.posts;
   }
 
-  createPosts() {
-    return 'Creando a post';
+  getPostById(id) {
+    return this.posts.find((post) => post.id === id);
+  }
+
+  createPosts(post) {
+    this.posts.push(post);
+    return 'aaaaaaaa';
   }
 
   updatePosts() {

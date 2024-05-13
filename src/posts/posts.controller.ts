@@ -1,21 +1,31 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Put,
+  Param,
+} from '@nestjs/common';
 import { PostsService } from './posts.service';
 
-@Controller('posts')
+@Controller('/posts')
 export class PostsController {
-  postsService: PostsService;
-  constructor(postsService: PostsService) {
-    this.postsService = postsService;
-  }
+  constructor(private postsService: PostsService) {}
 
   @Get()
   getAllPosts() {
     return this.postsService.getPosts();
   }
+  @Get('/:id')
+  getPostByID(@Param('id') id: string) {
+    console.log(id);
+    return this.postsService.getPostById(parseInt(id));
+  }
 
   @Post()
-  createPost() {
-    return this.postsService.createPosts();
+  createPost(@Body() post: any) {
+    return this.postsService.createPosts(post);
   }
 
   @Put()
