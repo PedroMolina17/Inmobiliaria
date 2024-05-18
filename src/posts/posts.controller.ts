@@ -9,6 +9,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
+import { CreatePost } from './DTO/create-post.dto';
 
 @Controller('/posts')
 export class PostsController {
@@ -29,7 +30,7 @@ export class PostsController {
   }
 
   @Post()
-  createPost(@Body() post: any) {
+  createPost(@Body() post: CreatePost) {
     return this.postsService.createPosts(post);
   }
 

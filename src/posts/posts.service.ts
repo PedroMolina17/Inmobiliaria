@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreatePost } from './DTO/create-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -12,7 +13,7 @@ export class PostsService {
     return this.posts.find((post) => post.id === id);
   }
 
-  createPosts(post) {
+  createPosts(post: CreatePost) {
     this.posts.push(post);
   }
 

@@ -1,8 +1,9 @@
+import { CreatePost } from './DTO/create-post.dto';
 export declare class PostsService {
     private posts;
     getPosts(): any[];
     getPostById(id: any): any;
-    createPosts(post: any): void;
+    createPosts(post: CreatePost): void;
     updatePosts(): string;
     deletePosts(): string;
 }
