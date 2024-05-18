@@ -14,7 +14,6 @@ export class PostsService {
 
   createPosts(post) {
     this.posts.push(post);
-    return 'aaaaaaaa';
   }
 
   updatePosts() {

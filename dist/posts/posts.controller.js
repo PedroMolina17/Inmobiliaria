@@ -24,7 +24,11 @@ let PostsController = class PostsController {
     }
     getPostByID(id) {
         console.log(id);
-        return this.postsService.getPostById(parseInt(id));
+        const taskFound = this.postsService.getPostById(parseInt(id));
+        if (!taskFound) {
+            return new common_1.NotFoundException(`Post ${id} not found`);
+        }
+        return taskFound;
     }
     createPost(post) {
         return this.postsService.createPosts(post);

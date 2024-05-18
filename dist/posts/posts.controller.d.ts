@@ -4,7 +4,7 @@ export declare class PostsController {
     constructor(postsService: PostsService);
     getAllPosts(): any[];
     getPostByID(id: string): any;
-    createPost(post: any): string;
+    createPost(post: any): void;
     updatePosts(): string;
     deletePosts(): string;
 }

@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Param,
+  NotFoundException,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
@@ -20,7 +21,11 @@ export class PostsController {
   @Get('/:id')
   getPostByID(@Param('id') id: string) {
     console.log(id);
-    return this.postsService.getPostById(parseInt(id));
+    const taskFound = this.postsService.getPostById(parseInt(id));
+    if (!taskFound) {
+      return new NotFoundException(`Post ${id} not found`);
+    }
+    return taskFound;
   }
 
   @Post()
