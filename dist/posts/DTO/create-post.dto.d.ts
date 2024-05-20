@@ -1,5 +1,5 @@
-export interface CreatePost {
-    id: string;
+export declare class CreatePost {
+    id: Number;
     title: string;
     description: string;
 }
