@@ -9,7 +9,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePost } from './DTO/create-post.dto';
+import { CreatePost } from './dto/create-post.dto';
 
 @Controller('/posts')
 export class PostsController {
