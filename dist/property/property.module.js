@@ -6,21 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.PropertyModule = void 0;
 const common_1 = require("@nestjs/common");
-const auth_module_1 = require("./auth/auth.module");
-const posts_module_1 = require("./posts/posts.module");
-const property_module_1 = require("./property/property.module");
-const typeproperty_module_1 = require("./typeproperty/typeproperty.module");
-const users_module_1 = require("./users/users.module");
-let AppModule = class AppModule {
+const property_service_1 = require("./property.service");
+const property_controller_1 = require("./property.controller");
+let PropertyModule = class PropertyModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.PropertyModule = PropertyModule;
+exports.PropertyModule = PropertyModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, posts_module_1.PostsModule, property_module_1.PropertyModule, typeproperty_module_1.TypepropertyModule, users_module_1.UsersModule],
-        controllers: [],
-        providers: [],
+        controllers: [property_controller_1.PropertyController],
+        providers: [property_service_1.PropertyService],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], PropertyModule);
+//# sourceMappingURL=property.module.js.map

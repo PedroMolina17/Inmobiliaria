@@ -1,4 +1,4 @@
-import { CreatePost } from './DTO/create-post.dto';
+import { CreatePost } from './dto/create-post.dto';
 export declare class PostsService {
     private posts;
     getPosts(): any[];

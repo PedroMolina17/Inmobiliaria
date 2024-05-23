@@ -1,5 +1,5 @@
 import { PostsService } from './posts.service';
-import { CreatePost } from './DTO/create-post.dto';
+import { CreatePost } from './dto/create-post.dto';
 export declare class PostsController {
     private postsService;
     constructor(postsService: PostsService);
