@@ -13,12 +13,22 @@ const posts_module_1 = require("./posts/posts.module");
 const property_module_1 = require("./property/property.module");
 const typeproperty_module_1 = require("./typeproperty/typeproperty.module");
 const users_module_1 = require("./users/users.module");
+const type_users_module_1 = require("./type-users/type-users.module");
+const prisma_module_1 = require("./prisma/prisma.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, posts_module_1.PostsModule, property_module_1.PropertyModule, typeproperty_module_1.TypepropertyModule, users_module_1.UsersModule],
+        imports: [
+            auth_module_1.AuthModule,
+            posts_module_1.PostsModule,
+            property_module_1.PropertyModule,
+            typeproperty_module_1.TypepropertyModule,
+            users_module_1.UsersModule,
+            type_users_module_1.TypeUsersModule,
+            prisma_module_1.PrismaModule,
+        ],
         controllers: [],
         providers: [],
     })
