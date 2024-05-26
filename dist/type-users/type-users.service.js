@@ -25,11 +25,11 @@ let TypeUsersService = class TypeUsersService {
     findOne(id) {
         return `This action returns a #${id} typeUser`;
     }
-    update(id, updateTypeUserDto) {
-        return `This action updates a #${id} typeUser`;
+    update(id, data) {
+        return this.prisma.typeUser.update({ where: { idTypeUser: id }, data });
     }
     remove(id) {
-        return `This action removes a #${id} typeUser`;
+        return this.prisma.typeUser.delete({ where: { idTypeUser: id } });
     }
 };
 exports.TypeUsersService = TypeUsersService;

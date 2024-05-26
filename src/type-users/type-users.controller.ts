@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { TypeUsersService } from './type-users.service';
 import { CreateTypeUserDto } from './dto/create-type-user.dto';
@@ -31,16 +32,13 @@ export class TypeUsersController {
     return this.typeUsersService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateTypeUserDto: UpdateTypeUserDto,
-  ) {
-    return this.typeUsersService.update(+id, updateTypeUserDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() data: TypeUser) {
+    return this.typeUsersService.update(Number(id), data);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.typeUsersService.remove(+id);
+  delete(@Param('id') id: string) {
+    return this.typeUsersService.remove(Number(id));
   }
 }

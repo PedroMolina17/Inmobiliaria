@@ -20,11 +20,11 @@ export class TypeUsersService {
     return `This action returns a #${id} typeUser`;
   }
 
-  update(id: number, updateTypeUserDto: UpdateTypeUserDto) {
-    return `This action updates a #${id} typeUser`;
+  update(id: number, data: TypeUser): Promise<TypeUser> {
+    return this.prisma.typeUser.update({ where: { idTypeUser: id }, data });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} typeUser`;
+    return this.prisma.typeUser.delete({ where: { idTypeUser: id } });
   }
 }
