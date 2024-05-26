@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TypeUsersController = void 0;
 const common_1 = require("@nestjs/common");
 const type_users_service_1 = require("./type-users.service");
+const create_type_user_dto_1 = require("./dto/create-type-user.dto");
+const update_type_user_dto_1 = require("./dto/update-type-user.dto");
 let TypeUsersController = class TypeUsersController {
     constructor(typeUsersService) {
         this.typeUsersService = typeUsersService;
@@ -25,14 +27,42 @@ let TypeUsersController = class TypeUsersController {
     async getAllTypeUsers() {
         return this.typeUsersService.findAll();
     }
-    findOne(id) {
-        return this.typeUsersService.findOne(+id);
+    async getTypeUserById(id) {
+        const typeUser = await this.typeUsersService.findOne(id);
+        if (!typeUser) {
+            throw new common_1.NotFoundException(`User with id ${id} not found`);
+        }
+        return typeUser;
     }
-    update(id, data) {
-        return this.typeUsersService.update(Number(id), data);
+    async updateTypeUser(id, data) {
+        try {
+            const typeUser = await this.typeUsersService.update(id, data);
+            if (!typeUser) {
+                throw new common_1.NotFoundException(`User with id ${id} not found`);
+            }
+            return typeUser;
+        }
+        catch (error) {
+            if (error instanceof common_1.NotFoundException) {
+                throw error;
+            }
+            throw new common_1.NotFoundException(`User with id ${id} not found`);
+        }
     }
-    delete(id) {
-        return this.typeUsersService.remove(Number(id));
+    async deleteTypeUser(id) {
+        try {
+            const deletedTypeUser = await this.typeUsersService.remove(id);
+            if (!deletedTypeUser) {
+                throw new common_1.NotFoundException(`User with id ${id} not found`);
+            }
+            return deletedTypeUser;
+        }
+        catch (error) {
+            if (error instanceof common_1.NotFoundException) {
+                throw error;
+            }
+            throw new common_1.NotFoundException(`User with id ${id} not found`);
+        }
     }
 };
 exports.TypeUsersController = TypeUsersController;
@@ -40,7 +70,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_type_user_dto_1.CreateTypeUserDto]),
     __metadata("design:returntype", void 0)
 ], TypeUsersController.prototype, "createTypeUser", null);
 __decorate([
@@ -51,26 +81,26 @@ __decorate([
 ], TypeUsersController.prototype, "getAllTypeUsers", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], TypeUsersController.prototype, "findOne", null);
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], TypeUsersController.prototype, "getTypeUserById", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
-    __metadata("design:returntype", void 0)
-], TypeUsersController.prototype, "update", null);
+    __metadata("design:paramtypes", [Number, update_type_user_dto_1.UpdateTypeUserDto]),
+    __metadata("design:returntype", Promise)
+], TypeUsersController.prototype, "updateTypeUser", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], TypeUsersController.prototype, "delete", null);
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], TypeUsersController.prototype, "deleteTypeUser", null);
 exports.TypeUsersController = TypeUsersController = __decorate([
     (0, common_1.Controller)('type-users'),
     __metadata("design:paramtypes", [type_users_service_1.TypeUsersService])

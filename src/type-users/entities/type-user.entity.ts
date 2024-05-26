@@ -1,1 +1,4 @@
-export class TypeUser {}
+export class TypeUser {
+  idTypeUser: number;
+  description: string;
+}

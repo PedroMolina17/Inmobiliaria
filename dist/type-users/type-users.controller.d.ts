@@ -1,23 +1,24 @@
 import { TypeUsersService } from './type-users.service';
-import { TypeUser } from '@prisma/client';
+import { CreateTypeUserDto } from './dto/create-type-user.dto';
+import { UpdateTypeUserDto } from './dto/update-type-user.dto';
 export declare class TypeUsersController {
     private readonly typeUsersService;
     constructor(typeUsersService: TypeUsersService);
-    createTypeUser(data: TypeUser): import(".prisma/client").Prisma.Prisma__TypeUserClient<{
+    createTypeUser(data: CreateTypeUserDto): Promise<{
         idTypeUser: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }>;
     getAllTypeUsers(): Promise<{
         idTypeUser: number;
         description: string;
     }[]>;
-    findOne(id: string): string;
-    update(id: string, data: TypeUser): Promise<{
+    getTypeUserById(id: number): Promise<{
         idTypeUser: number;
         description: string;
     }>;
-    delete(id: string): import(".prisma/client").Prisma.Prisma__TypeUserClient<{
+    updateTypeUser(id: number, data: UpdateTypeUserDto): Promise<UpdateTypeUserDto>;
+    deleteTypeUser(id: number): Promise<{
         idTypeUser: number;
         description: string;
-    }, never, import("@prisma/client/runtime/library").DefaultArgs>;
+    }>;
 }

@@ -6,6 +6,7 @@ import { TypepropertyModule } from './typeproperty/typeproperty.module';
 import { UsersModule } from './users/users.module';
 import { TypeUsersModule } from './type-users/type-users.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { ImageCoverModule } from './image-cover/image-cover.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PrismaModule } from './prisma/prisma.module';
     UsersModule,
     TypeUsersModule,
     PrismaModule,
+    ImageCoverModule,
   ],
   controllers: [],
   providers: [],

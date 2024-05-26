@@ -17,3 +17,18 @@ model TypeUser {
   idTypeUser  Int    @id @default(autoincrement())
   description String
 }
+
+model ImageCover {
+  idImageCover     Int                @id @default(autoincrement())
+  description      String
+  imageUrl         String
+  imageDescription ImageDescription[]
+}
+
+model ImageDescription {
+  idImageDescription     Int         @id @default(autoincrement())
+  description            String
+  imageUrl               String
+  ImageCover             ImageCover? @relation(fields: [imageCoverIdImageCover], references: [idImageCover])
+  imageCoverIdImageCover Int?
+}

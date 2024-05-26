@@ -16,19 +16,19 @@ let TypeUsersService = class TypeUsersService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    create(data) {
+    async create(data) {
         return this.prisma.typeUser.create({ data: data });
     }
     async findAll() {
         return this.prisma.typeUser.findMany();
     }
-    findOne(id) {
-        return `This action returns a #${id} typeUser`;
+    async findOne(id) {
+        return this.prisma.typeUser.findUnique({ where: { idTypeUser: id } });
     }
-    update(id, data) {
+    async update(id, data) {
         return this.prisma.typeUser.update({ where: { idTypeUser: id }, data });
     }
-    remove(id) {
+    async remove(id) {
         return this.prisma.typeUser.delete({ where: { idTypeUser: id } });
     }
 };

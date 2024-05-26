@@ -8,7 +8,7 @@ import { TypeUser } from '@prisma/client';
 export class TypeUsersService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: TypeUser) {
+  async create(data: CreateTypeUserDto) {
     return this.prisma.typeUser.create({ data: data });
   }
 
@@ -16,15 +16,15 @@ export class TypeUsersService {
     return this.prisma.typeUser.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} typeUser`;
+  async findOne(id: number): Promise<TypeUser> {
+    return this.prisma.typeUser.findUnique({ where: { idTypeUser: id } });
   }
 
-  update(id: number, data: TypeUser): Promise<TypeUser> {
+  async update(id: number, data: TypeUser): Promise<UpdateTypeUserDto> {
     return this.prisma.typeUser.update({ where: { idTypeUser: id }, data });
   }
 
-  remove(id: number) {
+  async remove(id: number): Promise<TypeUser> {
     return this.prisma.typeUser.delete({ where: { idTypeUser: id } });
   }
 }
