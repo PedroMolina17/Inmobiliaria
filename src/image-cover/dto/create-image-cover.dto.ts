@@ -1,1 +1,4 @@
-export class CreateImageCoverDto {}
+export class CreateImageCoverDto {
+  description: string;
+  imageUrl: string;
+}
