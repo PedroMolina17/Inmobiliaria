@@ -12,18 +12,18 @@ export class ImageCoverService {
   }
 
   findAll() {
-    return `This action returns all imageCover`;
+    return this.prisma.imageCover.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} imageCover`;
+    return this.prisma.imageCover.findUnique({ where: { idImageCover: id } });
   }
 
-  update(id: number, updateImageCoverDto: UpdateImageCoverDto) {
-    return `This action updates a #${id} imageCover`;
+  update(id: number, data: UpdateImageCoverDto) {
+    return this.prisma.imageCover.update({ where: { idImageCover: id }, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} imageCover`;
+  async remove(id: number) {
+    return this.prisma.imageCover.delete({ where: { idImageCover: id } });
   }
 }

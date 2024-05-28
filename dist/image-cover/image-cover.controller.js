@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageCoverController = void 0;
 const common_1 = require("@nestjs/common");
 const image_cover_service_1 = require("./image-cover.service");
-const update_image_cover_dto_1 = require("./dto/update-image-cover.dto");
+const create_image_cover_dto_1 = require("./dto/create-image-cover.dto");
 const multer_1 = require("@nestjs/platform-express/multer");
 const multer_2 = require("multer");
 const images_helper_1 = require("./helper/images.helper");
@@ -36,14 +36,37 @@ let ImageCoverController = class ImageCoverController {
     findAll() {
         return this.imageCoverService.findAll();
     }
-    findOne(id) {
-        return this.imageCoverService.findOne(+id);
+    async findOne(id) {
+        const typeUser = await this.imageCoverService.findOne(Number(id));
+        if (!typeUser) {
+            throw new common_1.NotFoundException(`User with id ${id} not found`);
+        }
+        return typeUser;
     }
-    update(id, updateImageCoverDto) {
-        return this.imageCoverService.update(+id, updateImageCoverDto);
+    async putUploadFile(file, body, id) {
+        const filePath = file.path;
+        const description = body.description;
+        const createImageCoverDto = {
+            imageUrl: filePath,
+            description: description,
+        };
+        const savedImage = await this.imageCoverService.update(Number(id), createImageCoverDto);
+        return savedImage;
     }
-    remove(id) {
-        return this.imageCoverService.remove(+id);
+    async remove(id) {
+        try {
+            const deleteImageCover = await this.imageCoverService.remove(+id);
+            if (!deleteImageCover) {
+                throw new common_1.NotFoundException(`User with id ${id} not found`);
+            }
+            return deleteImageCover;
+        }
+        catch (error) {
+            if (error instanceof common_1.NotFoundException) {
+                throw error;
+            }
+            throw new common_1.NotFoundException(`User with id ${id} not found`);
+        }
     }
 };
 exports.ImageCoverController = ImageCoverController;
@@ -58,7 +81,7 @@ __decorate([
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:paramtypes", [Object, create_image_cover_dto_1.CreateImageCoverDto]),
     __metadata("design:returntype", Promise)
 ], ImageCoverController.prototype, "uploadFile", null);
 __decorate([
@@ -71,23 +94,30 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
 ], ImageCoverController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Put)(':id'),
+    (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('imageCover', {
+        storage: (0, multer_2.diskStorage)({
+            destination: 'src/images/upload-image-cover',
+            filename: images_helper_1.renameImage,
+        }),
+    })),
+    __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_image_cover_dto_1.UpdateImageCoverDto]),
-    __metadata("design:returntype", void 0)
-], ImageCoverController.prototype, "update", null);
+    __metadata("design:paramtypes", [Object, create_image_cover_dto_1.CreateImageCoverDto, String]),
+    __metadata("design:returntype", Promise)
+], ImageCoverController.prototype, "putUploadFile", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ImageCoverController.prototype, "remove", null);
 exports.ImageCoverController = ImageCoverController = __decorate([
     (0, common_1.Controller)('image-cover'),

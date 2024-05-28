@@ -3,11 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseInterceptors,
   UploadedFile,
+  NotFoundException,
+  Put,
 } from '@nestjs/common';
 import { ImageCoverService } from './image-cover.service';
 import { CreateImageCoverDto } from './dto/create-image-cover.dto';
@@ -36,7 +37,7 @@ export class ImageCoverController {
   )
   async uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: any,
+    @Body() body: CreateImageCoverDto,
   ) {
     const filePath = file.path;
     const description = body.description;
@@ -54,20 +55,54 @@ export class ImageCoverController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.imageCoverService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    const typeUser = await this.imageCoverService.findOne(Number(id));
+    if (!typeUser) {
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
+    return typeUser;
   }
 
-  @Patch(':id')
-  update(
+  @Put(':id')
+  @UseInterceptors(
+    FileInterceptor('imageCover', {
+      storage: diskStorage({
+        destination: 'src/images/upload-image-cover',
+        filename: renameImage,
+      }),
+    }),
+  )
+  async putUploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() body: CreateImageCoverDto,
     @Param('id') id: string,
-    @Body() updateImageCoverDto: UpdateImageCoverDto,
   ) {
-    return this.imageCoverService.update(+id, updateImageCoverDto);
+    const filePath = file.path;
+    const description = body.description;
+    const createImageCoverDto: CreateImageCoverDto = {
+      imageUrl: filePath,
+      description: description,
+    };
+    const savedImage = await this.imageCoverService.update(
+      Number(id),
+      createImageCoverDto,
+    );
+    return savedImage;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.imageCoverService.remove(+id);
+  async remove(@Param('id') id: string) {
+    try {
+      const deleteImageCover = await this.imageCoverService.remove(+id);
+      if (!deleteImageCover) {
+        throw new NotFoundException(`User with id ${id} not found`);
+      }
+      return deleteImageCover;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new NotFoundException(`User with id ${id} not found`);
+    }
   }
 }

@@ -20,16 +20,16 @@ let ImageCoverService = class ImageCoverService {
         return this.prisma.imageCover.create({ data: data });
     }
     findAll() {
-        return `This action returns all imageCover`;
+        return this.prisma.imageCover.findMany();
     }
     findOne(id) {
-        return `This action returns a #${id} imageCover`;
+        return this.prisma.imageCover.findUnique({ where: { idImageCover: id } });
     }
-    update(id, updateImageCoverDto) {
-        return `This action updates a #${id} imageCover`;
+    update(id, data) {
+        return this.prisma.imageCover.update({ where: { idImageCover: id }, data });
     }
-    remove(id) {
-        return `This action removes a #${id} imageCover`;
+    async remove(id) {
+        return this.prisma.imageCover.delete({ where: { idImageCover: id } });
     }
 };
 exports.ImageCoverService = ImageCoverService;
