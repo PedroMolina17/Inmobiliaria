@@ -16,6 +16,7 @@ const users_module_1 = require("./users/users.module");
 const type_users_module_1 = require("./type-users/type-users.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const image_cover_module_1 = require("./image-cover/image-cover.module");
+const image_description_module_1 = require("./image-description/image-description.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,6 +31,7 @@ exports.AppModule = AppModule = __decorate([
             type_users_module_1.TypeUsersModule,
             prisma_module_1.PrismaModule,
             image_cover_module_1.ImageCoverModule,
+            image_description_module_1.ImageDescriptionModule,
         ],
         controllers: [],
         providers: [],

@@ -21,11 +21,6 @@ import { renameImage } from './helper/images.helper';
 export class ImageCoverController {
   constructor(private readonly imageCoverService: ImageCoverService) {}
 
-  // @Post()
-  // create(@Body() createImageCoverDto: CreateImageCoverDto) {
-  //   return this.imageCoverService.create(createImageCoverDto);
-  // }
-
   @Post()
   @UseInterceptors(
     FileInterceptor('imageCover', {
@@ -35,7 +30,7 @@ export class ImageCoverController {
       }),
     }),
   )
-  async uploadFile(
+  async postImageCover(
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageCoverDto,
   ) {
@@ -50,7 +45,7 @@ export class ImageCoverController {
   }
 
   @Get()
-  findAll() {
+  findAllImageCover() {
     return this.imageCoverService.findAll();
   }
 
@@ -72,7 +67,7 @@ export class ImageCoverController {
       }),
     }),
   )
-  async putUploadFile(
+  async putImageCover(
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageCoverDto,
     @Param('id') id: string,

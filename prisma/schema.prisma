@@ -26,9 +26,9 @@ model ImageCover {
 }
 
 model ImageDescription {
-  idImageDescription     Int         @id @default(autoincrement())
-  description            String
-  imageUrl               String
-  ImageCover             ImageCover? @relation(fields: [imageCoverIdImageCover], references: [idImageCover])
-  imageCoverIdImageCover Int?
+  idImageDescription Int         @id @default(autoincrement())
+  description        String
+  imageUrl           String
+  ImageCover         ImageCover? @relation(fields: [idImageCover], references: [idImageCover])
+  idImageCover       Int?
 }

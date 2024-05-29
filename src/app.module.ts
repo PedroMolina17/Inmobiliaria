@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { TypeUsersModule } from './type-users/type-users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ImageCoverModule } from './image-cover/image-cover.module';
+import { ImageDescriptionModule } from './image-description/image-description.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ImageCoverModule } from './image-cover/image-cover.module';
     TypeUsersModule,
     PrismaModule,
     ImageCoverModule,
+    ImageDescriptionModule,
   ],
   controllers: [],
   providers: [],

@@ -23,7 +23,7 @@ let ImageCoverController = class ImageCoverController {
     constructor(imageCoverService) {
         this.imageCoverService = imageCoverService;
     }
-    async uploadFile(file, body) {
+    async postImageCover(file, body) {
         const filePath = file.path;
         const description = body.description;
         const createImageCoverDto = {
@@ -33,7 +33,7 @@ let ImageCoverController = class ImageCoverController {
         const savedImage = await this.imageCoverService.create(createImageCoverDto);
         return savedImage;
     }
-    findAll() {
+    findAllImageCover() {
         return this.imageCoverService.findAll();
     }
     async findOne(id) {
@@ -43,7 +43,7 @@ let ImageCoverController = class ImageCoverController {
         }
         return typeUser;
     }
-    async putUploadFile(file, body, id) {
+    async putImageCover(file, body, id) {
         const filePath = file.path;
         const description = body.description;
         const createImageCoverDto = {
@@ -83,13 +83,13 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, create_image_cover_dto_1.CreateImageCoverDto]),
     __metadata("design:returntype", Promise)
-], ImageCoverController.prototype, "uploadFile", null);
+], ImageCoverController.prototype, "postImageCover", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], ImageCoverController.prototype, "findAll", null);
+], ImageCoverController.prototype, "findAllImageCover", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -111,7 +111,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, create_image_cover_dto_1.CreateImageCoverDto, String]),
     __metadata("design:returntype", Promise)
-], ImageCoverController.prototype, "putUploadFile", null);
+], ImageCoverController.prototype, "putImageCover", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

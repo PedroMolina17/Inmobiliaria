@@ -4,12 +4,12 @@ import { CreateImageCoverDto } from './dto/create-image-cover.dto';
 export declare class ImageCoverController {
     private readonly imageCoverService;
     constructor(imageCoverService: ImageCoverService);
-    uploadFile(file: Express.Multer.File, body: CreateImageCoverDto): Promise<{
+    postImageCover(file: Express.Multer.File, body: CreateImageCoverDto): Promise<{
         idImageCover: number;
         description: string;
         imageUrl: string;
     }>;
-    findAll(): import(".prisma/client").Prisma.PrismaPromise<{
+    findAllImageCover(): import(".prisma/client").Prisma.PrismaPromise<{
         idImageCover: number;
         description: string;
         imageUrl: string;
@@ -19,7 +19,7 @@ export declare class ImageCoverController {
         description: string;
         imageUrl: string;
     }>;
-    putUploadFile(file: Express.Multer.File, body: CreateImageCoverDto, id: string): Promise<{
+    putImageCover(file: Express.Multer.File, body: CreateImageCoverDto, id: string): Promise<{
         idImageCover: number;
         description: string;
         imageUrl: string;
