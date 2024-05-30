@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MinLength } from 'class-validator';
 
 export class CreateImageDescriptionDto {
   @IsNotEmpty()
@@ -7,6 +7,7 @@ export class CreateImageDescriptionDto {
   description: string;
 
   @IsNotEmpty()
+  @IsNumber()
   idImageCover: number;
 
   imageUrl: string;
