@@ -8,9 +8,14 @@ import { TypeUsersModule } from './type-users/type-users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ImageCoverModule } from './image-cover/image-cover.module';
 import { ImageDescriptionModule } from './image-description/image-description.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
     AuthModule,
     PostsModule,
     PropertyModule,

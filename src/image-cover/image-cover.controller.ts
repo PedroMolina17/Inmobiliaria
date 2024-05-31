@@ -25,7 +25,7 @@ export class ImageCoverController {
   @UseInterceptors(
     FileInterceptor('imageCover', {
       storage: diskStorage({
-        destination: 'src/images/upload-image-cover',
+        destination: 'public/images/upload-image-cover',
         filename: renameImage,
       }),
     }),
@@ -62,7 +62,7 @@ export class ImageCoverController {
   @UseInterceptors(
     FileInterceptor('imageCover', {
       storage: diskStorage({
-        destination: 'src/images/upload-image-cover',
+        destination: 'public/images/upload-image-cover',
         filename: renameImage,
       }),
     }),

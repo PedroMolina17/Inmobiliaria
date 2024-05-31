@@ -17,12 +17,17 @@ const type_users_module_1 = require("./type-users/type-users.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 const image_cover_module_1 = require("./image-cover/image-cover.module");
 const image_description_module_1 = require("./image-description/image-description.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'public'),
+            }),
             auth_module_1.AuthModule,
             posts_module_1.PostsModule,
             property_module_1.PropertyModule,

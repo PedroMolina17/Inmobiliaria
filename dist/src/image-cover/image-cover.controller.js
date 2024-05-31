@@ -74,7 +74,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('imageCover', {
         storage: (0, multer_2.diskStorage)({
-            destination: 'src/images/upload-image-cover',
+            destination: 'public/images/upload-image-cover',
             filename: images_helper_1.renameImage,
         }),
     })),
@@ -101,7 +101,7 @@ __decorate([
     (0, common_1.Put)(':id'),
     (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('imageCover', {
         storage: (0, multer_2.diskStorage)({
-            destination: 'src/images/upload-image-cover',
+            destination: 'public/images/upload-image-cover',
             filename: images_helper_1.renameImage,
         }),
     })),
