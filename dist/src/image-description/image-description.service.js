@@ -20,16 +20,23 @@ let ImageDescriptionService = class ImageDescriptionService {
         return this.prisma.imageDescription.create({ data: data });
     }
     findAll() {
-        return `This action returns all imageDescription`;
+        return this.prisma.imageDescription.findMany();
     }
     findOne(id) {
-        return `This action returns a #${id} imageDescription`;
+        return this.prisma.imageDescription.findUnique({
+            where: { idImageDescription: id },
+        });
     }
-    update(id, updateImageDescriptionDto) {
-        return `This action updates a #${id} imageDescription`;
+    update(id, data) {
+        return this.prisma.imageDescription.update({
+            where: { idImageDescription: id },
+            data: data,
+        });
     }
     remove(id) {
-        return `This action removes a #${id} imageDescription`;
+        return this.prisma.imageDescription.delete({
+            where: { idImageDescription: id },
+        });
     }
 };
 exports.ImageDescriptionService = ImageDescriptionService;

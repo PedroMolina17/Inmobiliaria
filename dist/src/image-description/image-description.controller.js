@@ -24,12 +24,12 @@ let ImageDescriptionController = class ImageDescriptionController {
     constructor(imageDescriptionService) {
         this.imageDescriptionService = imageDescriptionService;
     }
-    async postImageCover(file, body) {
+    async postImageDescription(file, body) {
         const filePath = file.path;
         const createImageDescriptionDto = {
             imageUrl: filePath,
             description: body.description,
-            idImageCover: Number(body.idImageCover),
+            idImageCover: body.idImageCover,
         };
         const savedImage = await this.imageDescriptionService.create(createImageDescriptionDto);
         return savedImage;
@@ -38,13 +38,13 @@ let ImageDescriptionController = class ImageDescriptionController {
         return this.imageDescriptionService.findAll();
     }
     findOne(id) {
-        return this.imageDescriptionService.findOne(+id);
+        return this.imageDescriptionService.findOne(Number(id));
     }
     update(id, updateImageDescriptionDto) {
         return this.imageDescriptionService.update(+id, updateImageDescriptionDto);
     }
     remove(id) {
-        return this.imageDescriptionService.remove(+id);
+        return this.imageDescriptionService.remove(id);
     }
 };
 exports.ImageDescriptionController = ImageDescriptionController;
@@ -52,7 +52,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('imageDescription', {
         storage: (0, multer_1.diskStorage)({
-            destination: 'src/images/upload-image-description',
+            destination: 'public/images/upload-image-description',
             filename: images_helper_1.renameImage,
         }),
     })),
@@ -61,7 +61,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, create_image_description_dto_1.CreateImageDescriptionDto]),
     __metadata("design:returntype", Promise)
-], ImageDescriptionController.prototype, "postImageCover", null);
+], ImageDescriptionController.prototype, "postImageDescription", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -72,11 +72,11 @@ __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ImageDescriptionController.prototype, "findOne", null);
 __decorate([
-    (0, common_1.Patch)(':id'),
+    (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -87,7 +87,7 @@ __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ImageDescriptionController.prototype, "remove", null);
 exports.ImageDescriptionController = ImageDescriptionController = __decorate([

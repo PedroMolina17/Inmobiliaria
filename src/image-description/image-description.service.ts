@@ -13,18 +13,25 @@ export class ImageDescriptionService {
   }
 
   findAll() {
-    return `This action returns all imageDescription`;
+    return this.prisma.imageDescription.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} imageDescription`;
+    return this.prisma.imageDescription.findUnique({
+      where: { idImageDescription: id },
+    });
   }
 
-  update(id: number, updateImageDescriptionDto: UpdateImageDescriptionDto) {
-    return `This action updates a #${id} imageDescription`;
+  update(id: number, data: UpdateImageDescriptionDto) {
+    return this.prisma.imageDescription.update({
+      where: { idImageDescription: id },
+      data: data,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} imageDescription`;
+    return this.prisma.imageDescription.delete({
+      where: { idImageDescription: id },
+    });
   }
 }

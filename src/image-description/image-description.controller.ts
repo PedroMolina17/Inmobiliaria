@@ -8,6 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  Put,
 } from '@nestjs/common';
 import { ImageDescriptionService } from './image-description.service';
 import { CreateImageDescriptionDto } from './dto/create-image-description.dto';
@@ -26,12 +27,12 @@ export class ImageDescriptionController {
   @UseInterceptors(
     FileInterceptor('imageDescription', {
       storage: diskStorage({
-        destination: 'src/images/upload-image-description',
+        destination: 'public/images/upload-image-description',
         filename: renameImage,
       }),
     }),
   )
-  async postImageCover(
+  async postImageDescription(
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageDescriptionDto,
   ) {
@@ -40,7 +41,7 @@ export class ImageDescriptionController {
     const createImageDescriptionDto: CreateImageDescriptionDto = {
       imageUrl: filePath,
       description: body.description,
-      idImageCover: Number(body.idImageCover),
+      idImageCover: body.idImageCover,
     };
     const savedImage = await this.imageDescriptionService.create(
       createImageDescriptionDto,
@@ -54,11 +55,11 @@ export class ImageDescriptionController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.imageDescriptionService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.imageDescriptionService.findOne(Number(id));
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateImageDescriptionDto: UpdateImageDescriptionDto,
@@ -67,7 +68,7 @@ export class ImageDescriptionController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.imageDescriptionService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.imageDescriptionService.remove(id);
   }
 }

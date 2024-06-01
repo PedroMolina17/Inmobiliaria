@@ -29,7 +29,7 @@ const ImageCover = () => {
       {TypeCoverImages.map((image) => (
         <div key={image.idImageCover}>
           <img
-            src={`http://localhost:3000/public/images/upload-image-cover/1716791321574-0.93214823140824431716791321574.jpeg`}
+            src={`http://localhost:3000/images/upload-image-cover/1716791321574-0.93214823140824431716791321574.jpeg`}
             alt={image.description}
           />
         </div>
