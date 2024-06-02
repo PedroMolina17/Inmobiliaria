@@ -27,7 +27,7 @@ export class ImageDescriptionController {
   @UseInterceptors(
     FileInterceptor('imageDescription', {
       storage: diskStorage({
-        destination: 'public/images/upload-image-description',
+        destination: './images/upload-image-cover',
         filename: renameImage,
       }),
     }),
@@ -36,8 +36,7 @@ export class ImageDescriptionController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageDescriptionDto,
   ) {
-    const filePath = file.path;
-
+    const filePath = `/images/upload-image-cover/${file.filename}`;
     const createImageDescriptionDto: CreateImageDescriptionDto = {
       imageUrl: filePath,
       description: body.description,

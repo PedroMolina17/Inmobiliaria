@@ -11,6 +11,8 @@ const common_1 = require("@nestjs/common");
 const image_cover_service_1 = require("./image-cover.service");
 const image_cover_controller_1 = require("./image-cover.controller");
 const prisma_module_1 = require("../prisma/prisma.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let ImageCoverModule = class ImageCoverModule {
 };
 exports.ImageCoverModule = ImageCoverModule;
@@ -18,7 +20,13 @@ exports.ImageCoverModule = ImageCoverModule = __decorate([
     (0, common_1.Module)({
         controllers: [image_cover_controller_1.ImageCoverController],
         providers: [image_cover_service_1.ImageCoverService],
-        imports: [prisma_module_1.PrismaModule],
+        imports: [
+            prisma_module_1.PrismaModule,
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', 'dist'),
+                serveRoot: '/dist',
+            }),
+        ],
     })
 ], ImageCoverModule);
 //# sourceMappingURL=image-cover.module.js.map

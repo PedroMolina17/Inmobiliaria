@@ -24,7 +24,7 @@ let ImageCoverController = class ImageCoverController {
         this.imageCoverService = imageCoverService;
     }
     async postImageCover(file, body) {
-        const filePath = file.path;
+        const filePath = `/upload-image-cover/${file.filename}`;
         const description = body.description;
         const createImageCoverDto = {
             imageUrl: filePath,
@@ -44,7 +44,7 @@ let ImageCoverController = class ImageCoverController {
         return typeUser;
     }
     async putImageCover(file, body, id) {
-        const filePath = file.path;
+        const filePath = `/images/upload-image-cover/${file.filename}`;
         const description = body.description;
         const createImageCoverDto = {
             imageUrl: filePath,
@@ -74,7 +74,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('imageCover', {
         storage: (0, multer_2.diskStorage)({
-            destination: 'public/images/upload-image-cover',
+            destination: './dist/images/upload-image-cover',
             filename: images_helper_1.renameImage,
         }),
     })),
@@ -101,7 +101,7 @@ __decorate([
     (0, common_1.Put)(':id'),
     (0, common_1.UseInterceptors)((0, multer_1.FileInterceptor)('imageCover', {
         storage: (0, multer_2.diskStorage)({
-            destination: 'public/images/upload-image-cover',
+            destination: './images/upload-image-cover',
             filename: images_helper_1.renameImage,
         }),
     })),

@@ -25,7 +25,7 @@ let ImageDescriptionController = class ImageDescriptionController {
         this.imageDescriptionService = imageDescriptionService;
     }
     async postImageDescription(file, body) {
-        const filePath = file.path;
+        const filePath = `/images/upload-image-cover/${file.filename}`;
         const createImageDescriptionDto = {
             imageUrl: filePath,
             description: body.description,
@@ -52,7 +52,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('imageDescription', {
         storage: (0, multer_1.diskStorage)({
-            destination: 'public/images/upload-image-description',
+            destination: './images/upload-image-cover',
             filename: images_helper_1.renameImage,
         }),
     })),

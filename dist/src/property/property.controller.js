@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const property_service_1 = require("./property.service");
 const create_property_dto_1 = require("./dto/create-property.dto");
 const update_property_dto_1 = require("./dto/update-property.dto");
+const swagger_1 = require("@nestjs/swagger");
 let PropertyController = class PropertyController {
     constructor(propertyService) {
         this.propertyService = propertyService;
@@ -75,6 +76,7 @@ __decorate([
 ], PropertyController.prototype, "remove", null);
 exports.PropertyController = PropertyController = __decorate([
     (0, common_1.Controller)('property'),
+    (0, swagger_1.ApiTags)('property'),
     __metadata("design:paramtypes", [property_service_1.PropertyService])
 ], PropertyController);
 //# sourceMappingURL=property.controller.js.map
