@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ImageDescriptionService } from './image-description.service';
 import { CreateImageDescriptionDto } from './dto/create-image-description.dto';
@@ -27,7 +28,7 @@ export class ImageDescriptionController {
   @UseInterceptors(
     FileInterceptor('imageDescription', {
       storage: diskStorage({
-        destination: './images/upload-image-cover',
+        destination: './images/upload-image-description',
         filename: renameImage,
       }),
     }),
@@ -36,7 +37,7 @@ export class ImageDescriptionController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: CreateImageDescriptionDto,
   ) {
-    const filePath = `/images/upload-image-cover/${file.filename}`;
+    const filePath = `/upload-image-description/${file.filename}`;
     const createImageDescriptionDto: CreateImageDescriptionDto = {
       imageUrl: filePath,
       description: body.description,
@@ -49,8 +50,14 @@ export class ImageDescriptionController {
   }
 
   @Get()
-  findAll() {
-    return this.imageDescriptionService.findAll();
+  findAll(@Query('idImageCover') idImageCover: number) {
+    if (idImageCover) {
+      return this.imageDescriptionService.findByImageCover(
+        Number(idImageCover),
+      );
+    } else {
+      return this.imageDescriptionService.findAll();
+    }
   }
 
   @Get(':id')
@@ -68,6 +75,6 @@ export class ImageDescriptionController {
 
   @Delete(':id')
   remove(@Param('id') id: number) {
-    return this.imageDescriptionService.remove(id);
+    return this.imageDescriptionService.remove(Number(id));
   }
 }

@@ -27,6 +27,11 @@ let ImageDescriptionService = class ImageDescriptionService {
             where: { idImageDescription: id },
         });
     }
+    findByImageCover(idImageCover) {
+        return this.prisma.imageDescription.findMany({
+            where: { idImageCover: idImageCover },
+        });
+    }
     update(id, data) {
         return this.prisma.imageDescription.update({
             where: { idImageDescription: id },

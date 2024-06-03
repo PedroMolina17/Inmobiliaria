@@ -25,7 +25,7 @@ export class ImageCoverController {
   @UseInterceptors(
     FileInterceptor('imageCover', {
       storage: diskStorage({
-        destination: './dist/images/upload-image-cover',
+        destination: './images/upload-image-cover',
         filename: renameImage,
       }),
     }),
@@ -72,7 +72,7 @@ export class ImageCoverController {
     @Body() body: CreateImageCoverDto,
     @Param('id') id: string,
   ) {
-    const filePath = `/images/upload-image-cover/${file.filename}`;
+    const filePath = `/upload-image-cover/${file.filename}`;
     const description = body.description;
     const createImageCoverDto: CreateImageCoverDto = {
       imageUrl: filePath,

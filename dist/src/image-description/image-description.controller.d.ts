@@ -11,7 +11,7 @@ export declare class ImageDescriptionController {
         imageUrl: string;
         idImageCover: number;
     }>;
-    findAll(): import(".prisma/client").Prisma.PrismaPromise<{
+    findAll(idImageCover: number): import(".prisma/client").Prisma.PrismaPromise<{
         idImageDescription: number;
         description: string;
         imageUrl: string;

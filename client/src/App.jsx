@@ -1,13 +1,15 @@
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ImageCover from './components/ImageCover';
-
+import ImageDescription from './components/ImageDescription';
 function App() {
   return (
-    <>
-      <div className="text-white">
-        <ImageCover />
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ImageCover />}></Route>;
+        <Route path="/:id" element={<ImageDescription />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

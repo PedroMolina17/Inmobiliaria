@@ -25,7 +25,7 @@ let ImageDescriptionController = class ImageDescriptionController {
         this.imageDescriptionService = imageDescriptionService;
     }
     async postImageDescription(file, body) {
-        const filePath = `/images/upload-image-cover/${file.filename}`;
+        const filePath = `/upload-image-description/${file.filename}`;
         const createImageDescriptionDto = {
             imageUrl: filePath,
             description: body.description,
@@ -34,8 +34,13 @@ let ImageDescriptionController = class ImageDescriptionController {
         const savedImage = await this.imageDescriptionService.create(createImageDescriptionDto);
         return savedImage;
     }
-    findAll() {
-        return this.imageDescriptionService.findAll();
+    findAll(idImageCover) {
+        if (idImageCover) {
+            return this.imageDescriptionService.findByImageCover(Number(idImageCover));
+        }
+        else {
+            return this.imageDescriptionService.findAll();
+        }
     }
     findOne(id) {
         return this.imageDescriptionService.findOne(Number(id));
@@ -44,7 +49,7 @@ let ImageDescriptionController = class ImageDescriptionController {
         return this.imageDescriptionService.update(+id, updateImageDescriptionDto);
     }
     remove(id) {
-        return this.imageDescriptionService.remove(id);
+        return this.imageDescriptionService.remove(Number(id));
     }
 };
 exports.ImageDescriptionController = ImageDescriptionController;
@@ -52,7 +57,7 @@ __decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('imageDescription', {
         storage: (0, multer_1.diskStorage)({
-            destination: './images/upload-image-cover',
+            destination: './images/upload-image-description',
             filename: images_helper_1.renameImage,
         }),
     })),
@@ -64,8 +69,9 @@ __decorate([
 ], ImageDescriptionController.prototype, "postImageDescription", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('idImageCover')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ImageDescriptionController.prototype, "findAll", null);
 __decorate([

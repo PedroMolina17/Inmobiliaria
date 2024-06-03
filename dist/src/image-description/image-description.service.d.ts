@@ -22,6 +22,12 @@ export declare class ImageDescriptionService {
         imageUrl: string;
         idImageCover: number;
     }, null, import("@prisma/client/runtime/library").DefaultArgs>;
+    findByImageCover(idImageCover: number): import(".prisma/client").Prisma.PrismaPromise<{
+        idImageDescription: number;
+        description: string;
+        imageUrl: string;
+        idImageCover: number;
+    }[]>;
     update(id: number, data: UpdateImageDescriptionDto): import(".prisma/client").Prisma.Prisma__ImageDescriptionClient<{
         idImageDescription: number;
         description: string;

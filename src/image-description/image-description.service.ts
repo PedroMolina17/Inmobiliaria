@@ -22,6 +22,11 @@ export class ImageDescriptionService {
     });
   }
 
+  findByImageCover(idImageCover: number) {
+    return this.prisma.imageDescription.findMany({
+      where: { idImageCover: idImageCover },
+    });
+  }
   update(id: number, data: UpdateImageDescriptionDto) {
     return this.prisma.imageDescription.update({
       where: { idImageDescription: id },

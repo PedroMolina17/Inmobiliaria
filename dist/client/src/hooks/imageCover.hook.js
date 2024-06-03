@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTypeCoverImages = void 0;
-const imageCover_service_1 = require("../services/imageCover.service");
+const api_1 = require("../api/api");
 const getTypeCoverImages = async () => {
-    const res = await imageCover_service_1.api.get('image-cover');
+    const res = await api_1.api.get('image-cover');
     return res.data;
 };
 exports.getTypeCoverImages = getTypeCoverImages;

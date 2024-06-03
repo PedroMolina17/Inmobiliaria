@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.api = void 0;
-const axios_1 = require("axios");
-exports.api = axios_1.default.create({
-    baseURL: 'http://localhost:3000/',
-});
+exports.getTypeCoverImages = void 0;
+const api_1 = require("../api/api");
+const getTypeCoverImages = async () => {
+    const res = await api_1.api.get('image-cover');
+    return res.data;
+};
+exports.getTypeCoverImages = getTypeCoverImages;
 //# sourceMappingURL=imageCover.service.js.map
