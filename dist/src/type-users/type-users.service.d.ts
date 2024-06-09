@@ -5,10 +5,7 @@ import { TypeUser } from '@prisma/client';
 export declare class TypeUsersService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(data: CreateTypeUserDto): Promise<{
-        idTypeUser: number;
-        description: string;
-    }>;
+    create(data: CreateTypeUserDto): Promise<any>;
     findAll(): Promise<TypeUser[]>;
     findOne(id: number): Promise<TypeUser>;
     update(id: number, data: TypeUser): Promise<UpdateTypeUserDto>;
